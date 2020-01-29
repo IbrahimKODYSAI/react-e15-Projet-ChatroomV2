@@ -21,7 +21,7 @@ export default [
   },
   {
     id: 2,
-    pseudo: 'Arthur',
+    pseudo: 'Ibrahim',
     label: 'Ho super et tu etais dans quel pays ? ',
   },
 ];
