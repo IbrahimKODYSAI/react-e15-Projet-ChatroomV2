@@ -1,7 +1,11 @@
-// == Import : npm
+/**
+ * Npm import
+ */
 import { connect } from 'react-redux';
 
-// == Import : local
+/**
+ * Local import
+ */
 import Example from 'src/components/Example';
 
 // Action Creators
@@ -37,12 +41,12 @@ const ExampleContainer = connect(
   mapDispatchToProps,
 )(Example);
 
-// == Export
-export default ExampleContainer;
-
-/* = export à la volée
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Example);
+/* 2 temps
+const createContainer = connect(mapStateToProps, mapDispatchToProps);
+const ExampleContainer = createContainer(Example);
 */
+
+/**
+ * Export
+ */
+export default ExampleContainer;

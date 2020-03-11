@@ -1,36 +1,13 @@
+@import 'src/styles/vars';
+
 #app {
-  font-size: 1.2em;
-  text-align: center;
-  margin: 1em;
-}
-.container{
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid #CACACA;
-  width: 100%;
-  height: 920px;
-}
-.chat{
-  &-messages{
-    padding-top: 1em;
-    border: 1px solid #CACACA;
-    height: 86%;
-    overflow-y: scroll;
+  &-title {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    font-size: 2em;
+    font-weight: 700;
+    padding: 1rem;
+    color: lighten($main-color, 10%);
   }
-  &-input{
-    &--name{
-      height: 7%;
-      align-content: flex-start;
-
-    }
-    &--messages{
-      height: 7%;
-      align-items: flex-end;
-    }
-  }
-
 }
-

@@ -1,0 +1,63 @@
+@import 'src/styles/vars';
+
+#settings {
+  position: absolute;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  top: 1.3rem;
+  right: 0;
+  transition: .6s;
+  transform: translateX(15rem);
+  
+  &-toggle {
+    &::before {
+      content: '+';
+      font-size: 2em;
+      font-weight: 700;
+      cursor: pointer;
+      display: block;
+      transition: transform .6s;
+      margin-right: .3em;
+      transform: rotate(0deg);
+    }
+  }
+  
+  &-form {
+    width: 15rem;
+    display: flex;
+  }
+  
+  &.settings--open {
+    transform: translateX(0);
+  }
+
+  &.settings--error.settings--open {
+    box-shadow:0 0 3px #F40;
+  }
+
+  &.settings--open &-toggle {
+    &::before {
+      color: $form-color;
+      transform: rotate(45deg);
+    }
+  }
+
+  &-input {
+    width: 80%;
+  }
+  &-button {
+    width: 20%;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  
+  &-button,
+  &-input {
+    color: $form-color;
+    padding: .8em;
+    border: 0;
+    border-bottom: 1px solid $border-color;
+    background: transparent;
+  }
+}

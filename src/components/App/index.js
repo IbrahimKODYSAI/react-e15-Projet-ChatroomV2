@@ -1,105 +1,35 @@
-// == Import : npm
+/**
+ * Import
+ */
 import React from 'react';
-import io from 'socket.io-client';
 
-// == Import : local
+/**
+ * Local import
+ */
+import Messages from 'src/containers/Messages';
+import Form from 'src/containers/Form';
+import Settings from 'src/containers/Settings';
+
 import './app.scss';
-import MessageForm from 'src/components/MessageForm';
-import NameForm from 'src/components/NameForm';
-import MessageArea from 'src/components/MessageArea';
+/**
+ * Code
+ */
+const App = () => (
+  // 1. je découpe mon application en zones
+  <div id="app">
+    <h1 id="app-title">Chatroom</h1>
+    <Messages />
+    <Form />
+    <Settings />
+  </div>
+);
+/*
+  <Settings open /> === <Settings open={true} />
+  Pour passer une props avec un booléen en valeur qui vaut true
+  on peut ne pas spécifer de valeur
+*/
 
-// == Composant
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      MessagesList: [],
-      inputNameValue: 'Anonymous',
-      inputMessageValue: '',
-      showInputName: true,
-    };
-  }
-
-  componentDidMount() {
-    this.socket = io('http://localhost:3001');
-    this.socket.on('send_message', (msg) => {
-      this.setState({ MessagesList: [...this.state.MessagesList, msg] });
-    });
-  }
-
-  closeDivByMessageArea = () => {
-    this.setState({
-      showInputName: true,
-    });
-  }
-
-  showDiv = () => {
-    const { showInputName } = this.state;
-    this.setState({
-      showInputName: showInputName === null ? showInputName : !showInputName,
-    });
-  }
-
-
-  changeNameInputValue = (newinputValue) => {
-    this.setState({
-      inputNameValue: newinputValue,
-    });
-  }
-
-  changeInputMessageValue = (newInputValue) => {
-    this.setState({
-      inputMessageValue: newInputValue,
-    });
-  }
-
-  addMessage = () => {
-    const { inputMessageValue, inputNameValue } = this.state;
-    // const allIds = MessagesList.map(message => message.id);
-    // const id = allIds.length > 0 ? Math.max(...allIds) + 1 : 1;
-    console.log(inputMessageValue);
-    this.socket.emit('send_message', { pseudo: inputNameValue, label: inputMessageValue });
-    this.setState({
-      inputMessageValue: '',
-    });
-  }
-
-  render() {
-    const {
-      MessagesList,
-      inputMessageValue,
-      inputNameValue,
-      showInputName,
-    } = this.state;
-    return (
-      <div className="container">
-        <div className="chat-input--name">
-          <NameForm
-            closeDivByMessageArea={this.closeDivByMessageArea}
-            showInputName={showInputName}
-            showDiv={this.showDiv}
-            inputNameValue={inputNameValue}
-            changeNameInputValue={this.changeNameInputValue}
-          />
-        </div>
-        <div className="chat-messages">
-          <MessageArea
-            closeDivByMessageArea={this.closeDivByMessageArea}
-            MessagesList={MessagesList}
-          />
-        </div>
-        <div className="chat-input--messages">
-          <MessageForm
-            addMessage={this.addMessage}
-            changeInputMessageValue={this.changeInputMessageValue}
-            inputMessageValue={inputMessageValue}
-          />
-        </div>
-      </div>
-    );
-  }
-}
-
-
-// == Export
+/**
+ * Export
+ */
 export default App;

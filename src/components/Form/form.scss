@@ -1,0 +1,22 @@
+@import 'src/styles/vars';
+
+#form {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+
+  &-input {
+    width: 100%;
+    border: 0;
+    color: $main-color;
+    border-top: 1px solid $border-color;
+    font-size: 1.2em;
+    padding: 1.5em 1em;
+  }
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+}

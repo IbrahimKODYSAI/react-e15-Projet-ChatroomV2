@@ -9,6 +9,7 @@ import App from 'src/components/App';
 import store from 'src/store';
 
 // == Render
+// 4.5 j'alimente App avec mon store
 const rootComponent = (
   <Provider store={store}>
     <App />
