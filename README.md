@@ -2,14 +2,6 @@
 
 L'objectif : coder un *chat* en NodeJS + React + Redux :scream:
 
-## Résultat attendu
-
-* On peut envoyer un message à tous les navigateurs connectés.
-
-* On peut changer de pseudo.
-
-Voici l'application, lancée dans deux onglets différents mis côte-à-côte (vous pouvez essayer de faire plus joli, ça ne devrait pas être difficile :grin:) :
-
 ![resultat](resultat.gif)
 
 
@@ -19,17 +11,6 @@ Voici l'application, lancée dans deux onglets différents mis côte-à-côte (v
 Un chat, c'est *grosso modo*, et le plus souvent, plein de clients (navigateurs) qui communiquent ensemble à travers un serveur central. La communication peut s'établir de bien des manières, nous allons ici utiliser un WebSocket.
 
 > **Installez les dépendances nécessaires avec `yarn add express socket.io`.**
-
-### Serveur
-
-La partie Node.js est déjà prête, disponible dans le dossier `server/`.
-
-Il serait super cool d'avoir deux commandes dans le projet :
-
-* `yarn start:server` pour lancer le serveur back ;
-* `yarn start` pour lancer la transpilation et le build du front.
-
-Vous avez déjà utilisé ces commandes dans des challenges précédents, à retrouver donc !
 
 ### socket.io
 
@@ -80,42 +61,6 @@ Par exemple :
 ### React
 
 Vous savez faire, rien à signaler :smiley:
-
-Seul conseil que je peux vous donner, si vous ne savez pas comment commencer :
-vous pouvez partir sur 4 composants, `<App />`, `<Messages />`, `<Form />` et `<Settings />`.
-
-### Redux
-
-> **Installez les dépendances nécessaires avec `yarn add redux react-redux`.**
-
-Pour envoyer des requêtes au serveur et traiter ses réponses, nous allons nous développer un middleware Redux.
-
-Il est intéressant d'installer l'extension Redux pour Chrome ou Firefox afin de voir ce qu'il se passe coté Redux. Afin de pouvoir activer à la fois le middleware *Redux Dev Tools*, ainsi que notre propre middleware, nous devons utiliser la fonction `compose` de la librairie `redux`.
-
-> Sachant qu'on ne peut ajouter *Redux Dev Tools* que lorsque l'extension est installée, ce qui n'est pas toujours le cas, on a recours à une astuce dans le code source : on stocke les *Dev Tools* dans un tableau, pour ensuite le déverser en argument de la fonction `compose`. Résultat net : l'extension est déversée si elle existe, ou bien rien n'est déversé.
-
-```js
-import { createStore, applyMiddleware, compose } from 'redux';
-
-import reducer from './reducer'; // notre reducer custom
-import socket from './middlewares/socket'; // notre middleware custom
-
-// Extension Redux Dev Tools
-const devTools = [
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-];
-
-// Middlewares custom — on n'en a qu'un seul
-const socketMiddleware = applyMiddleware(socket);
-
-// Enhancers : les extensions/outils + les middlewares custom
-const enhancers = compose(socketMiddleware, ...devTools);
-
-// Store, configuré avec le reducer et les "enhancers"
-const store = createStore(reducer, enhancers);
-
-export default store;
-```
 
 ### WebSocket
 
